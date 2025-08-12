@@ -62,7 +62,7 @@ void loop() {
 }
 ```
 <img
-src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sem%C3%A1foro.png" width="1024" height="550" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sem%C3%A1foro.png" />
 
 
 ### Ejercicio n° 3 Arduino: "Led parpadeante"
