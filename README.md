@@ -59,6 +59,7 @@ void loop() {
   delay(2000); // 2 segundos
 }
 ```
+<a href="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sem%C3%A1foro.png">Semaforo.</a>
 
 ### Ejercicio n° 3 Arduino: "Led parpadeante"
 
