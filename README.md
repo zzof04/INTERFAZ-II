@@ -11,6 +11,8 @@ void loop() {
   // No es necesario poner nada en el loop para este ejemplo
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/holamundo.png" width="1024" height="550" />
 
 ### Ejercicio n° 2 Arduino: "semáforo"
 ```js
