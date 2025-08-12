@@ -87,6 +87,8 @@ void loop() {   // Se repite infinitamente
 
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/LedParpadeante.png" width="1024" height="550" />
 
 ### Ejercicio n° 4 Arduino: "control por pulsador"
 
@@ -103,6 +105,9 @@ void loop() {
   }
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Controlpulsador.png" width="1024" height="550" />
+
 
 ### Ejercicio n° 5 Arduino: "Led potenciometro"
 
@@ -116,3 +121,6 @@ void loop() {
   analogWrite(9, brillo);               // Ajustar brillo
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Ledpotenciometro.png" width="1024" height="550" />
+
