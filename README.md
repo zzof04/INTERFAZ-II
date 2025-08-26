@@ -245,5 +245,5 @@ void draw()
 }
 ```
 <img
-src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Ledpotenciometro.png" width="1024" height="550" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Arduino%20%2B%20Processing.png" width="1024" height="550" />
 
