@@ -107,8 +107,9 @@ void loop() {
 ```
 <img
 src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Controlpulsador.png" width="1024" height="550" />
+
 <img
-src="[https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sem%C3%A1foro.png](https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/boton%20pulsador.jpeg)" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/BotonPulsador.png" />
 
 
 ### Ejercicio n° 5 Arduino: "Led potenciometro"
