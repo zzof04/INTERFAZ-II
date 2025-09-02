@@ -263,9 +263,10 @@ void draw()
   ellipse(width/1.5, height/2, d, d); 
   
 }
-
+```
 
 ### Ejercicio n° 8 Boton Arduino + Processing: Circulos
+
 #### Codigo Arduino
 ```js
 int buttonPin = 2;  // Pin del botón
