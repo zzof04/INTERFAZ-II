@@ -425,9 +425,9 @@ class CircleData {
 src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Arduino%2Bprocessing%2Bboton%2Bpulsador.png" width="1024" height="550" />
 
 
-### ejercicio n° 10 Arduino Botón prcessing 
+### ejercicio n° 10 Arduino Botón processing 
 
-## Processing
+#### Processing
 ```js
 import processing.serial.*;
 
@@ -638,4 +638,94 @@ void playTrack(int index) {
   // Actualizamos la variable para saber cuál es la pista activa
   currentTrack = index;
 }
+```
+### Ejercicio n° 13 Arduino + processing "nebulosa con potenciometro"
+
+#### codigo arduino
+
+```js
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int val = analogRead(A0);       // Lee el potenciómetro (valor entre 0 y 1023)
+  Serial.println(val);            // Envia el valor por el puerto serial
+  delay(20);                      // Pequeño retraso para evitar saturar el puerto
+}
+```
+
+#### codigo processing
+
+```;
+import processing.serial.*;
+
+Serial myPort;
+String val;
+int sensorVal = 0;
+
+float increment = 0.01;
+float zoff = 0.0;
+float zincrement = 0.02;
+
+void setup() {
+  size(920, 720);
+  frameRate(30);
+  noSmooth();
+  
+  // Inicializa el puerto serial (ajusta el índice si es necesario)
+  String portName = Serial.list()[0];
+  myPort = new Serial(this, portName, 9600);
+}
+
+void draw() {
+  readSerial();  // Lee el valor del potenciómetro
+
+  // Mapea el potenciómetro a parámetros que afectan el color y velocidad
+  zincrement = map(sensorVal, 0, 1043, 0.005, 0.05);  // Velocidad del ruido
+  float colorShift = map(sensorVal, 0, 1050, 0, 2530); // Desfase de color
+  
+  loadPixels();
+
+  float xoff = 0.0;
+
+  for (int x = 0; x < width; x++) {
+    xoff += increment;
+    float yoff = 0.0;
+
+    for (int y = 0; y < height; y++) {
+      yoff += increment;
+
+      // Ruido 3D
+      float n = noise(xoff, yoff, zoff);
+
+      // Convertir ruido a colores tipo nebulosa
+      // Cambia de tonalidad según el potenciómetro (colorShift)
+      float r = map(sin(TWO_PI * n + radians(colorShift)), -1, 1, 40, 250);
+      float g = map(cos(TWO_PI * n + radians(colorShift * 1.2)), -1, 1, 50, 255);
+      float b = map(sin(TWO_PI * n + radians(colorShift * 0.5)), -1, 1, 20, 255);
+
+      pixels[x + y * width] = color(r, g, b);
+    }
+  }
+
+  updatePixels();
+
+  zoff += zincrement;
+}
+
+void readSerial() {
+  while (myPort.available() > 0) {
+    val = myPort.readStringUntil('\n');
+    if (val != null) {
+      val = trim(val);
+      if (val.length() > 0) {
+        try {
+          sensorVal = int(val);
+        } catch (Exception e) {
+          println("Error al convertir:", val);
+        }
+      }
+    }
+  }
 ```
