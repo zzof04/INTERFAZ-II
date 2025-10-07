@@ -672,19 +672,20 @@ void setup() {
   size(920, 720);
   frameRate(30);
   noSmooth();
-  
-  // Inicializa el puerto serial (ajusta el índice si es necesario)
-  String portName = Serial.list()[0];
+
+  println(Serial.list());  // Imprime la lista de puertos seriales para verificar
+  String portName = Serial.list()[0];  // Cambia el índice si no es el puerto correcto
   myPort = new Serial(this, portName, 9600);
+  myPort.bufferUntil('\n');  // Configura para leer hasta salto de línea
 }
 
 void draw() {
-  readSerial();  // Lee el valor del potenciómetro
+  background(0);
 
-  // Mapea el potenciómetro a parámetros que afectan el color y velocidad
-  zincrement = map(sensorVal, 0, 1043, 0.005, 0.05);  // Velocidad del ruido
-  float colorShift = map(sensorVal, 0, 1050, 0, 2530); // Desfase de color
-  
+  // Mapear valores del potenciómetro (0-1023) a parámetros visuales
+  zincrement = map(sensorVal, 0, 1023, 0.005, 0.05);
+  float colorShift = map(sensorVal, 0, 1023, 0, 2530);
+
   loadPixels();
 
   float xoff = 0.0;
@@ -696,11 +697,8 @@ void draw() {
     for (int y = 0; y < height; y++) {
       yoff += increment;
 
-      // Ruido 3D
       float n = noise(xoff, yoff, zoff);
 
-      // Convertir ruido a colores tipo nebulosa
-      // Cambia de tonalidad según el potenciómetro (colorShift)
       float r = map(sin(TWO_PI * n + radians(colorShift)), -1, 1, 40, 250);
       float g = map(cos(TWO_PI * n + radians(colorShift * 1.2)), -1, 1, 50, 255);
       float b = map(sin(TWO_PI * n + radians(colorShift * 0.5)), -1, 1, 20, 255);
@@ -714,18 +712,20 @@ void draw() {
   zoff += zincrement;
 }
 
-void readSerial() {
-  while (myPort.available() > 0) {
-    val = myPort.readStringUntil('\n');
-    if (val != null) {
-      val = trim(val);
-      if (val.length() > 0) {
-        try {
-          sensorVal = int(val);
-        } catch (Exception e) {
-          println("Error al convertir:", val);
-        }
+// Evento que se llama cuando llega una línea completa por serial
+void serialEvent(Serial myPort) {
+  val = myPort.readStringUntil('\n');
+  if (val != null) {
+    val = trim(val);
+    if (val.length() > 0) {
+      try {
+        sensorVal = int(val);
+        // println(sensorVal);  // Descomenta para depurar
+      } catch (Exception e) {
+        println("Error al convertir:", val);
       }
     }
   }
+}
+
 ```
