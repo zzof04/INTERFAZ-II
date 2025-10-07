@@ -729,3 +729,5 @@ void serialEvent(Serial myPort) {
 }
 
 ```
+<img
+src="[https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/holamundo.png](https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Captura%20de%20pantalla%202025-10-07%20112905.png)" width="1024" height="550" />
