@@ -848,3 +848,52 @@ void draw()
 ```
 <img
 src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sensor.png" width="1024" height="550" />
+
+### Ejercicio n° 15 processing: "VIDEO ascii"
+
+```;
+import processing.video.*;
+
+Capture cam;
+String asciiChars = "<3 * -+ :p";  // Characters from dark to light
+int cols, rows;
+int cellSize = 15; // Size of each ASCII cell
+
+void setup() {
+  size(640, 480);
+  cam = new Capture(this, 640, 480);
+  cam.start();
+  textAlign(CENTER, CENTER);
+  textSize(cellSize);
+  cols = width / cellSize;
+  rows = height / cellSize;
+}
+
+void draw() {
+  if (cam.available() == true) {
+    cam.read();
+  }
+
+  cam.loadPixels();
+  background(0);
+
+  for (int y = 0; y < rows; y++) {
+    for (int x = 0; x < cols; x++) {
+      int pixelX = x * cellSize;
+      int pixelY = y * cellSize;
+      int index = pixelX + pixelY * cam.width;
+      color c = cam.pixels[index];
+      
+      // Calculate brightness and map it to ASCII characters
+      float bright = brightness(c);
+      int charIndex = int(map(bright, 0, 255, asciiChars.length() - 1, 0));
+      String asciiChar = asciiChars.substring(charIndex, charIndex + 1);
+
+      fill(255);
+      text(asciiChar, pixelX + cellSize * 0.5, pixelY + cellSize * 0.5);
+    }
+  }
+}
+```
+<img
+src="" width="1024" height="550" />
