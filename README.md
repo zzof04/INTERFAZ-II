@@ -897,3 +897,91 @@ void draw() {
 ```
 <img
 src="" width="1024" height="550" />
+
+### Ejercicio n° 16 "VIDEO Glitch"
+
+#### codigo arduino
+```;
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int pot1 = analogRead(A0);  // Read first potentiometer
+  int pot2 = analogRead(A1);  // Read second potentiometer
+
+  // Send potentiometer values as comma-separated values
+  Serial.print(pot1);
+  Serial.print(",");
+  Serial.println(pot2);
+  
+  delay(50);  // Delay to reduce data rate
+}
+```
+
+#### codigo processing
+```;
+import processing.serial.*;
+import processing.video.*;
+
+Serial arduinoPort;
+Movie video;
+boolean glitch = false;
+int glitchIntensity = 0; // Adjusts how many pixels are affected
+float glitchFrequency = 0; // Adjusts how frequently glitch is applied
+
+void setup() {
+  size(640, 480);
+  
+  // Set up serial communication
+  arduinoPort = new Serial(this, Serial.list()[0], 9600); // Adjust port if needed
+  
+  // Load video
+  video = new Movie(this, "video.mp4");
+  video.loop();
+}
+
+void draw() {
+  if (video.available()) {
+    video.read();
+  }
+  
+  video.loadPixels();
+  
+  // Apply glitch effect based on potentiometer values
+  if (glitch) {
+    for (int i = 0; i < video.pixels.length; i++) {
+      if (random(1) < glitchFrequency) {
+        video.pixels[i] = color(random(255), random(255), random(255), glitchIntensity);
+      }
+    }
+  }
+  
+  video.updatePixels();
+  image(video, 0, 0, width, height);
+}
+
+// Toggle glitch effect when mouse is pressed
+void mousePressed() {
+  glitch = !glitch;
+}
+
+// Read values from Arduino
+void serialEvent(Serial port) {
+  String data = port.readStringUntil('\n');
+  if (data != null) {
+    String[] values = split(trim(data), ',');
+    
+    if (values.length == 2) {
+      int pot1Value = int(values[0]);
+      int pot2Value = int(values[1]);
+      
+      // Map potentiometer values to control glitch properties
+      glitchIntensity = int(map(pot1Value, 0, 1023, 0, 255));
+      glitchFrequency = map(pot2Value, 0, 1023, 0, 0.1);  // Adjust this for sensitivity
+    }
+  }
+}
+```
+<img
+src="" width="1024" height="550" />
