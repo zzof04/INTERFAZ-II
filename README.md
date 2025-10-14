@@ -1,6 +1,6 @@
 # INTERFAZ-II
-1. [Hola Mundo](https://#ejercicio-n-1-arduino-hola-mundo) <br>
-
+1. [Hola Mundo](#ejercicio-n-1-arduino-hola-mundo) <br>
+2. [Semáforo](
 
 ### Ejercicio n° 1 Arduino: "Hola mundo"
 
