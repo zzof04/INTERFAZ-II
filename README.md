@@ -847,4 +847,4 @@ void draw()
 }
 ```
 <img
-src="" width="1024" height="550" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sensor.png" width="1024" height="550" />
