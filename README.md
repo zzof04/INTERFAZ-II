@@ -2,7 +2,7 @@
 1. [Hola Mundo](#ejercicio-n-1-arduino-hola-mundo) <br>
 2. [Semáforo](#ejercicio-n-2-arduino-sem%C3%A1foro) <br>
 3. [Led Parpadeante](#ejercicio-n-3-arduino-led-parpadeante) <br>
-4. [Control por Pulsador]() <br>
+4. [Control por Pulsador](#ejercicio-n-4-arduino-control-por-pulsador) <br>
 5. [Led potenciometro]() <br>
 
 ### Ejercicio n° 1 Arduino: "Hola mundo"
