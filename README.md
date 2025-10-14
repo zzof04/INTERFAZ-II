@@ -985,3 +985,21 @@ void serialEvent(Serial port) {
 ```
 <img
 src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Glitch.png" width="1024" height="550" />
+
+### Ejercicio n° 17 "Sensor de humedad"
+
+#### codigo arduino
+```;
+
+void setup()
+{
+  Serial.begin(9600);// abre el puerto serial y Establece la velocidad en baudios a 9600 bps
+}
+void loop()
+{
+  int sensorValue;
+  sensorValue = analogRead(0);   //conectar el sensor de humedad al pin analogo 0
+  Serial.println(sensorValue); //imprime el valor a serial.
+  delay(200);
+}
+```
