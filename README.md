@@ -896,7 +896,7 @@ void draw() {
 }
 ```
 <img
-src="" width="1024" height="550" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/video.png" width="1024" height="550" />
 
 ### Ejercicio n° 16 "VIDEO Glitch"
 
@@ -984,4 +984,4 @@ void serialEvent(Serial port) {
 }
 ```
 <img
-src="" width="1024" height="550" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/Glitch.png" width="1024" height="550" />
