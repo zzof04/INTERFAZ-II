@@ -1112,3 +1112,120 @@ void draw() {
   }
 }
 ```
+
+### Ejercicio n° 19 proyecto "espacio entre texturas"
+
+#### codigo arduino
+```;
+void setup() {
+  Serial.begin(9600);  // Inicializamos la comunicación serial
+}
+
+void loop() {
+  int sensorValue = analogRead(A0);  // Leemos el valor del sensor Sharp (valor analógico entre 0 y 1023)
+  Serial.println(sensorValue);  // Enviamos el valor leído al puerto serial
+  delay(50);  // Espera de 20 ms
+}
+```
+
+#### codigo processing
+```;
+// --- Librerías necesarias ---
+import processing.serial.*;
+
+// --- Comunicación serial con Arduino ---
+Serial myPort;
+float sensorValue = 0;
+
+// --- Variables de imágenes ---
+PImage[] imgs;   // Arreglo para 8 imágenes
+PImage avgImg;   // Imagen resultante
+
+// --- Configuración inicial ---
+void setup() {
+  size(1920, 1080);  // Tamaño de ventana
+
+  // --- Cargar las 8 imágenes PNG nombradas del 1 al 8 ---
+  imgs = new PImage[8];
+  for (int i = 0; i < imgs.length; i++) {
+    String filename = "imagenes/" + (i + 1) + ".png"; // 1.png a 8.png
+    imgs[i] = loadImage(filename);
+    if (imgs[i] == null) {
+      println("⚠️ No se pudo cargar: " + filename);
+    } else {
+      imgs[i].resize(width, height); // Ajustar tamaño
+      println("✅ Cargada: " + filename);
+    }
+  }
+
+  avgImg = createImage(width, height, RGB); // Imagen mezclada
+
+  // --- Conectar con Arduino ---
+  printArray(Serial.list()); // Mostrar puertos disponibles
+  // ⚠️ Ajusta el nombre del puerto según tu sistema:
+  myPort = new Serial(this, Serial.list()[0], 9600);
+}
+
+// --- Bucle principal ---
+void draw() {
+  background(0);
+
+  // Leer valor del sensor Sharp
+  readSerial();
+
+  // Mapear (0–1023) al rango de las 8 imágenes (0–7)
+  float mixValue = map(sensorValue, 0, 1023, 0, imgs.length - 1);
+
+  // Mezclar imágenes según el valor leído
+  avgImagesWeighted(mixValue);
+
+  // Mostrar imagen resultante
+  image(avgImg, 0, 0);
+
+  // Mostrar información en pantalla
+  fill(255);
+  textSize(20);
+  text("Valor sensor: " + nf(sensorValue, 1, 0), 10, height - 40);
+  text("Imagen mezclada: " + nf(mixValue, 1, 2), 10, height - 15);
+}
+
+// --- Función de mezcla entre imágenes ---
+void avgImagesWeighted(float mix) {
+  avgImg.loadPixels();
+
+  mix = constrain(mix, 0, imgs.length - 1);
+
+  int i1 = floor(mix);                  // Imagen base
+  int i2 = min(i1 + 1, imgs.length - 1); // Imagen siguiente
+  float t = mix - i1;                   // Fracción entre ambas
+
+  imgs[i1].loadPixels();
+  imgs[i2].loadPixels();
+
+  for (int i = 0; i < avgImg.pixels.length; i++) {
+    color c1 = imgs[i1].pixels[i];
+    color c2 = imgs[i2].pixels[i];
+
+    float r = lerp(red(c1), red(c2), t);
+    float g = lerp(green(c1), green(c2), t);
+    float b = lerp(blue(c1), blue(c2), t);
+
+    avgImg.pixels[i] = color(r, g, b);
+  }
+
+  avgImg.updatePixels();
+}
+
+// --- Lectura del puerto serial ---
+void readSerial() {
+  while (myPort.available() > 0) {
+    String val = myPort.readStringUntil('\n');
+    if (val != null) {
+      val = trim(val);
+      if (val.length() > 0) {
+        sensorValue = float(val);
+      }
+    }
+  }
+}
+```
