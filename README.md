@@ -1259,7 +1259,7 @@ PImage avgImg;   // Imagen resultante
 
 // --- Configuración inicial ---
 void setup() {
-  size(1920, 1080);  // Tamaño de ventana
+  fullScreen();  // Tamaño de ventana
 
   // --- Cargar las 30 imágenes PNG nombradas del 1 al 30 ---
   imgs = new PImage[30];
