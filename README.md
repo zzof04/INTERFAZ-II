@@ -1112,8 +1112,117 @@ void draw() {
   }
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sensor%20y%20glich.png" />
 
-### Ejercicio n° 19 proyecto "espacio entre texturas"
+### Ejercicio n° 19 "Promedio de imágenes"
+
+#### codigo arduino
+```;
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int potValue = analogRead(A0);
+  Serial.println(potValue);
+  delay(20);
+}
+```
+
+#### codigo processing
+```;
+import processing.serial.*;
+
+Serial myPort;
+PImage[] imgs;
+int numImages = 8;
+PImage avgImg;
+float mixAmount = 0;
+
+void setup() {
+  size(1920, 1080);
+  //println(Serial.list());
+  
+  //Cambia el índice según tu puerto (0, 1, 2, etc.)
+  myPort = new Serial(this, Serial.list()[0], 9600);
+  //myPort = new Serial(this, "/dev/cu.usbmodem1101", 9600);
+  myPort.bufferUntil('\n');
+
+  // Cargar imágenes
+  imgs = new PImage[numImages];
+  imgs[0] = loadImage("1.png");
+  imgs[1] = loadImage("2.png");
+  imgs[2] = loadImage("3.png");
+  imgs[3] = loadImage("4.png");
+  imgs[4] = loadImage("5.png");
+  imgs[5] = loadImage("6.png");
+  imgs[6] = loadImage("7.png");
+  imgs[7] = loadImage("8.png");
+
+  avgImg = createImage(imgs[0].width, imgs[0].height, RGB);
+}
+
+void draw() {
+  // Dibujar la imagen promedio según el valor del potenciómetro
+  background(0);
+  calcAverage(mixAmount);
+  image(avgImg, 0, 0, width, height);
+  
+  fill(255);
+  textSize(20);
+  text("Mezcla: " + nf(mixAmount, 1, 2), 20, height - 20);
+}
+
+void serialEvent(Serial p) {
+  String val = p.readStringUntil('\n');
+  if (val != null) {
+    val = trim(val);
+    float sensor = float(val);
+    mixAmount = map(sensor, 0, 1023, 0, 1); // 0 a 1
+  }
+}
+
+void calcAverage(float t) {
+  avgImg.loadPixels();
+
+  for (int i = 0; i < avgImg.pixels.length; i++) {
+    color c1 = imgs[0].pixels[i];
+    color c2 = imgs[1].pixels[i];
+    color c3 = imgs[2].pixels[i];
+    color c4 = imgs[3].pixels[i];
+    color c5 = imgs[4].pixels[i];
+    color c6 = imgs[5].pixels[i];
+    color c7 = imgs[6].pixels[i];
+    color c8 = imgs[7].pixels[i];
+   
+
+    // Promedio ponderado según el potenciómetro
+    float r = red(c1)*(1-t) + red(c2)*t*0.5 + red(c3)*t*0.5 + red(c4)*(1-t) + red(c5)*t*0.5 + red(c6)*t*0.5 + red(c7)*(1-t) + red(c8)*t*0.5;
+    float g = green(c1)*(1-t) + green(c2)*t*0.5 + green(c3)*t*0.5 + green(c4)*(1-t) + green(c5)*t*0.5 + green(c6)*t*0.5 + green(c7)*(1-t) + green(c8)*t*0.5;
+    float b = blue(c1)*(1-t) + blue(c2)*t*0.5 + blue(c3)*t*0.5 + blue(c4)*(1-t) + blue(c5)*t*0.5 + blue(c6)*t*0.5 + blue(c7)*(1-t) + blue(c8)*t*0.5;
+
+    avgImg.pixels[i] = color(r, g, b);
+  }
+  avgImg.updatePixels();
+}
+```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sensor%20de%20imagenes.png" />
+
+
+### Ejercicio n° 20 proyecto "espacio entre texturas"
+
+```;
+#### Alumnas: Jacqueline Peralta, Sofia Salazar y Javiera León
+
+El proyecto "Espacio entre Texturas" nace desde nuestros intereses en común; la botánica y la astronomía como dos opuestos que se pueden relacionar y a su vez el uso del cuerpo humano como una herramienta que "controla" a través del sensor sharp estas dos facetas.
+
+Nuestro objetivo es crear un juego de texturas relacionados a estos dos campos:
+Desde una mirada tanto de lo micro, donde se utilizan gofrados e impresiones que simulan raíces y lo relacionado a la tierra.
+Como una mirada desde lo macro, utilizando renderizados de nebulosas y lo relacionado al universo. 
+```
+
 
 #### codigo arduino
 ```;
@@ -1138,23 +1247,23 @@ Serial myPort;
 float sensorValue = 0;
 
 // --- Variables de imágenes ---
-PImage[] imgs;   // Arreglo para 8 imágenes
+PImage[] imgs;   // Arreglo para 30 imágenes
 PImage avgImg;   // Imagen resultante
 
 // --- Configuración inicial ---
 void setup() {
   size(1920, 1080);  // Tamaño de ventana
 
-  // --- Cargar las 8 imágenes PNG nombradas del 1 al 8 ---
-  imgs = new PImage[8];
+  // --- Cargar las 30 imágenes PNG nombradas del 1 al 30 ---
+  imgs = new PImage[30];
   for (int i = 0; i < imgs.length; i++) {
-    String filename = "imagenes/" + (i + 1) + ".png"; // 1.png a 8.png
+    String filename = "imagenes/" + (i + 1) + ".png"; // 1.png a 30.png
     imgs[i] = loadImage(filename);
     if (imgs[i] == null) {
-      println("⚠️ No se pudo cargar: " + filename);
+      println("No se pudo cargar: " + filename);
     } else {
-      imgs[i].resize(width, height); // Ajustar tamaño
-      println("✅ Cargada: " + filename);
+      imgs[i].resize(width, height); // Ajustar tamaño a la ventana
+      println("Cargada: " + filename);
     }
   }
 
@@ -1162,7 +1271,7 @@ void setup() {
 
   // --- Conectar con Arduino ---
   printArray(Serial.list()); // Mostrar puertos disponibles
-  // ⚠️ Ajusta el nombre del puerto según tu sistema:
+  // Ajusta el índice o nombre del puerto si es necesario:
   myPort = new Serial(this, Serial.list()[0], 9600);
 }
 
@@ -1173,7 +1282,7 @@ void draw() {
   // Leer valor del sensor Sharp
   readSerial();
 
-  // Mapear (0–1023) al rango de las 8 imágenes (0–7)
+  // Mapear (0–1023) al rango de las 30 imágenes (0–29)
   float mixValue = map(sensorValue, 0, 1023, 0, imgs.length - 1);
 
   // Mezclar imágenes según el valor leído
@@ -1195,9 +1304,9 @@ void avgImagesWeighted(float mix) {
 
   mix = constrain(mix, 0, imgs.length - 1);
 
-  int i1 = floor(mix);                  // Imagen base
+  int i1 = floor(mix);                   // Imagen base
   int i2 = min(i1 + 1, imgs.length - 1); // Imagen siguiente
-  float t = mix - i1;                   // Fracción entre ambas
+  float t = mix - i1;                    // Fracción entre ambas
 
   imgs[i1].loadPixels();
   imgs[i2].loadPixels();
@@ -1228,4 +1337,5 @@ void readSerial() {
     }
   }
 }
+
 ```
