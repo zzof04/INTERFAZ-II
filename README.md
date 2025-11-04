@@ -200,6 +200,8 @@ void loop() {
   //delay(2000); // 2 segundos
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/semaforo%20parpadeante.png" />
 
 ### Ejercicio n° 7 Arduino + Processing: "Potenciometro"
 
@@ -270,6 +272,8 @@ void draw()
   
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/potenciometro.png" />
 
 ### Ejercicio n° 8 Boton Arduino + Processing: Circulos
 
@@ -563,7 +567,7 @@ void loop() {
 }
 ```
 
-## Processing Botonera
+### Processing Botonera
 ```js
 // Importamos librería para comunicación serial
 import processing.serial.*;
@@ -1009,6 +1013,8 @@ void loop()
   delay(200);
 }
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/sensor%20humedad.png" />
 
 ### Ejercicio n° 18 "Cuerpo, vídeo, sensor sharp"
 
