@@ -1217,7 +1217,7 @@ src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/se
 ```;
 El proyecto "Espacio entre Texturas" nace desde nuestros intereses en común; la botánica y la astronomía como dos opuestos
 que se pueden relacionar y a su vez el uso del cuerpo humano como una herramienta que "controla"
-a través del sensor sharp estas dos facetas.
+a través del sensor sharp estas dos facetas para crear una conexión entre lo micro y lo macro, lo natural y el universo.
 
 Nuestro objetivo es crear un juego de texturas relacionados a estos dos campos:
 Desde una mirada tanto de lo micro, donde se utilizan gofrados e impresiones que simulan raíces y lo relacionado a la tierra.
