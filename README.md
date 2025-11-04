@@ -1213,9 +1213,8 @@ src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/se
 
 ### Ejercicio n° 20 proyecto "espacio entre texturas"
 
-```;
 #### Alumnas: Jacqueline Peralta, Sofia Salazar y Javiera León
-
+```;
 El proyecto "Espacio entre Texturas" nace desde nuestros intereses en común; la botánica y la astronomía como dos opuestos que se pueden relacionar y a su vez el uso del cuerpo humano como una herramienta que "controla" a través del sensor sharp estas dos facetas.
 
 Nuestro objetivo es crear un juego de texturas relacionados a estos dos campos:
