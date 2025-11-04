@@ -1336,4 +1336,4 @@ src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/es
 
 
 <img
-src="" />
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/caja%20sensor.png" />
