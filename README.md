@@ -1330,5 +1330,10 @@ sensorValue = float(val);
 }
 }
 
-
 ```
+<img
+src="https://raw.githubusercontent.com/zzof04/INTERFAZ-II/refs/heads/main/img/espacio%20entre%20texturas.png" />
+
+
+<img
+src="" />
