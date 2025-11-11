@@ -4,6 +4,22 @@
 3. [Led Parpadeante](#ejercicio-n-3-arduino-led-parpadeante) <br>
 4. [Control por Pulsador](#ejercicio-n-4-arduino-control-por-pulsador) <br>
 5. [Led potenciometro](#ejercicio-n-5-arduino-led-potenciometro) <br>
+6. [Semáforo parpadeante](#ejercicio-n-6-arduino-sem%C3%A1foro-parpadeante) <br>
+7. [Arduino + Processing: "Potenciometro"](#ejercicio-n-7-arduino--processing-potenciometro) <br>
+8. [Boton Arduino + Processing: Circulos](#ejercicio-n-8-boton-arduino--processing-circulos) <br>
+9. [ Arduino + processing + boton + potenciometro](#ejercicio-n-9-arduino--processing--boton--potenciometro) <br>
+10. [ Arduino Botón processing](#ejercicio-n-10-arduino-bot%C3%B3n-processing) <br>
+11. [Arduino Botonera](#ejercicio-n-11-arduino-botonera) <br>
+12. [Processing Botonera](#processing-botonera) <br>
+13. [Arduino + processing "nebulosa con potenciometro"](#ejercicio-n-13-arduino--processing-nebulosa-con-potenciometro) <br>
+14. [Arduino + processing: "sensor de movimiento"](#ejercicio-n-14-arduino--processing-sensor-de-movimiento) <br>
+15. [processing: "VIDEO ascii"](#ejercicio-n-15-processing-video-ascii) <br>
+16. ["VIDEO Glitch"](#ejercicio-n-16-video-glitch) <br>
+17. ["Sensor de humedad"](#ejercicio-n-17-sensor-de-humedad) <br>
+18. ["Cuerpo, vídeo, sensor sharp"](#ejercicio-n-18-cuerpo-v%C3%ADdeo-sensor-sharp) <br>
+19. ["Promedio de imágenes"](#ejercicio-n-19-promedio-de-im%C3%A1genes) <br>
+20. [proyecto "espacio entre texturas"](#ejercicio-n-20-proyecto-espacio-entre-texturas) <br>
+
 
 ### Ejercicio n° 1 Arduino: "Hola mundo"
 
@@ -567,7 +583,7 @@ void loop() {
 }
 ```
 
-### Processing Botonera
+### Ejercicio n° 12 Processing Botonera
 ```js
 // Importamos librería para comunicación serial
 import processing.serial.*;
